@@ -10,11 +10,13 @@ class DBClient {
     this.client = new MongoClient(url);
 
     this.client.connect((err) => {
-      if (err) console.error(err);
-      else console.log('Connected successfully to server');
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log('Connected successfully to server');
+      this.db = this.client.db(database);
     });
-
-    this.db = this.client.db(database);
   }
 
   isAlive() {
